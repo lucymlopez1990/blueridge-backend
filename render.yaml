@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: blueridge-api
+    env: node
+    plan: free
+    buildCommand: npm install && npx prisma migrate deploy && npx prisma generate
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        sync: false
+      - key: STRIPE_SECRET
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
